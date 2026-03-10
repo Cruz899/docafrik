@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DocAfrik – Générateur de Documents Professionnels pour l'Afrique</title>
+<meta name="description" content="Créez vos factures, contrats, devis et fiches de paie en 30 secondes. Gratuit pour les entrepreneurs africains."/>
+<meta name="keywords" content="générateur facture Sénégal, contrat travail Afrique, devis professionnel, fiche de paie"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--gold:#C8922A;--gold-light:#E8B84B;--dark:#080808;--dark2:#111;--dark3:#1A1A1A;--dark4:#222;--white:#fff;--muted:#777;--border:rgba(200,146,42,0.18);--border2:rgba(255,255,255,0.06);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--dark);color:var(--white);min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(8,8,8,0.97);backdrop-filter:blur(20px);z-index:200;}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:800;color:var(--gold);cursor:pointer;letter-spacing:-1px;}
+.logo span{color:var(--white);}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.88rem;font-weight:500;transition:color 0.2s;cursor:pointer;}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{background:var(--gold);color:var(--dark);border:none;padding:10px 26px;border-radius:50px;font-weight:700;font-size:0.88rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s;}
+.nav-cta:hover{background:var(--gold-light);}
+/* PAGES */
+.page{display:none;}.page.active{display:block;}
+/* HERO */
+.hero{padding:110px 48px 90px;text-align:center;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(200,146,42,0.08),transparent 70%);pointer-events:none;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,146,42,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,146,42,0.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse 80% 80% at 50% 0%,black,transparent);}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,146,42,0.08);border:1px solid var(--border);color:var(--gold);padding:7px 20px;border-radius:50px;font-size:0.75rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:30px;animation:fadeUp 0.5s ease both;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;line-height:1.05;margin-bottom:24px;animation:fadeUp 0.5s ease 0.1s both;letter-spacing:-1px;}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero p{font-size:1.05rem;color:var(--muted);max-width:520px;margin:0 auto 44px;line-height:1.75;font-weight:300;animation:fadeUp 0.5s ease 0.2s both;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp 0.5s ease 0.3s both;}
+.btn-primary{background:var(--gold);color:var(--dark);border:none;padding:16px 38px;border-radius:50px;font-weight:700;font-size:0.95rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.25s;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 10px 40px rgba(200,146,42,0.35);}
+.btn-outline{background:transparent;color:var(--white);border:1px solid var(--border2);padding:16px 38px;border-radius:50px;font-weight:500;font-size:0.95rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.25s;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+/* STATS */
+.stats-bar{display:flex;justify-content:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.stat-item{padding:30px 50px;text-align:center;border-right:1px solid var(--border);flex:1;min-width:130px;}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:800;color:var(--gold);}
+.stat-label{font-size:0.76rem;color:var(--muted);margin-top:5px;}
+/* FEATURES */
+.features{padding:90px 48px;max-width:1200px;margin:0 auto;}
+.section-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.5px;}
+.section-sub{color:var(--muted);font-size:0.92rem;margin-top:10px;line-height:1.7;max-width:480px;font-weight:300;}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;margin-top:50px;}
+.feature-card{background:var(--dark2);border:1px solid var(--border2);border-radius:14px;padding:30px;transition:all 0.3s;position:relative;overflow:hidden;}
+.feature-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-light));transform:scaleX(0);transition:transform 0.3s;transform-origin:left;}
+.feature-card:hover{border-color:var(--border);transform:translateY(-3px);}
+.feature-card:hover::after{transform:scaleX(1);}
+.feature-icon{margin-bottom:16px;}
+.feature-card h3{font-weight:600;font-size:1rem;margin-bottom:8px;}
+.feature-card p{color:var(--muted);font-size:0.86rem;line-height:1.65;font-weight:300;}
+/* GENERATOR */
+.gen-page{padding:56px 48px;max-width:1280px;margin:0 auto;}
+.gen-header{margin-bottom:36px;}
+.gen-header h1{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.5px;}
+.gen-header p{color:var(--muted);margin-top:7px;font-weight:300;}
+.doc-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;padding-bottom:22px;border-bottom:1px solid var(--border);}
+.doc-tab{padding:9px 18px;border-radius:50px;border:1px solid var(--border2);background:var(--dark2);cursor:pointer;font-size:0.83rem;font-weight:500;color:var(--muted);font-family:'Outfit',sans-serif;transition:all 0.2s;}
+.doc-tab:hover{border-color:var(--border);color:var(--white);}
+.doc-tab.active{background:rgba(200,146,42,0.12);border-color:var(--gold);color:var(--white);}
+.gen-layout{display:grid;grid-template-columns:390px 1fr;gap:26px;align-items:start;}
+.form-card{background:var(--dark2);border:1px solid var(--border2);border-radius:18px;padding:26px;position:sticky;top:88px;}
+.form-card h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:var(--gold);margin-bottom:22px;}
+.form-group{margin-bottom:13px;}
+.form-group label{display:block;font-size:0.7rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--dark3);border:1px solid var(--border2);color:var(--white);padding:10px 13px;border-radius:9px;font-family:'Outfit',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);}
+.form-group textarea{min-height:68px;resize:vertical;}
+.form-group select option{background:var(--dark3);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.form-divider{border:none;border-top:1px solid var(--border2);margin:14px 0;}
+.section-label{font-size:0.66rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:11px;display:block;}
+.btn-gen{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--dark);border:none;padding:13px;border-radius:11px;font-weight:700;font-size:0.93rem;cursor:pointer;margin-top:6px;font-family:'Outfit',sans-serif;transition:all 0.25s;}
+.btn-gen:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(200,146,42,0.4);}
+/* PREVIEW */
+.preview-card{background:var(--dark2);border:1px solid var(--border2);border-radius:18px;overflow:hidden;}
+.preview-toolbar{display:flex;align-items:center;justify-content:space-between;padding:13px 20px;border-bottom:1px solid var(--border2);background:var(--dark3);}
+.preview-toolbar span{font-size:0.8rem;font-weight:600;color:var(--muted);}
+.toolbar-btns{display:flex;gap:7px;}
+.tbtn{padding:7px 15px;border-radius:8px;font-size:0.76rem;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:500;border:1px solid var(--border2);background:var(--dark4);color:var(--muted);transition:all 0.2s;}
+.tbtn:hover{border-color:var(--gold);color:var(--gold);}
+.tbtn.gold{background:var(--gold);color:var(--dark);border-color:var(--gold);font-weight:700;}
+.tbtn.gold:hover{background:var(--gold-light);}
+.preview-area{background:#fff;min-height:560px;padding:40px;position:relative;}
+.preview-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#bbb;text-align:center;}
+.preview-empty svg{opacity:0.2;}
+.preview-empty p{font-size:0.86rem;opacity:0.5;line-height:1.6;}
+/* DOC CONTENT */
+.doc-content{display:none;font-family:'Outfit',sans-serif;color:#111;font-size:13px;line-height:1.6;}
+.doc-content.show{display:block;}
+.dh{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;padding-bottom:16px;border-bottom:3px solid #C8922A;}
+.company{font-size:1.25rem;font-weight:800;color:#C8922A;font-family:'Cormorant Garamond',serif;}
+.co-info{color:#888;font-size:0.75rem;margin-top:4px;line-height:1.5;}
+.dh-right{text-align:right;}
+.dtype{font-size:0.9rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:1px;}
+.dnum{color:#999;font-size:0.75rem;margin-top:3px;}
+.parties{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px;}
+.party{background:#f9f9f9;padding:12px 14px;border-radius:8px;border-left:3px solid #C8922A;}
+.party-lbl{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#C8922A;margin-bottom:5px;}
+.party-name{font-weight:700;font-size:0.88rem;}
+.party-info{color:#888;font-size:0.75rem;margin-top:2px;}
+table.items{width:100%;border-collapse:collapse;margin:16px 0;}
+table.items th{background:#C8922A;color:#fff;padding:9px 12px;text-align:left;font-size:0.73rem;font-weight:600;text-transform:uppercase;}
+table.items td{padding:10px 12px;border-bottom:1px solid #f0f0f0;font-size:0.83rem;}
+.totals{display:flex;justify-content:flex-end;margin-top:16px;}
+.total-box{min-width:200px;background:#fff8ee;border:1px solid #C8922A;border-radius:9px;padding:13px 17px;}
+.t-row{display:flex;justify-content:space-between;font-size:0.79rem;color:#888;padding:2px 0;}
+.t-final{display:flex;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid #C8922A;}
+.t-label{font-weight:700;font-size:0.85rem;color:#333;}
+.t-amount{font-weight:800;font-size:1.1rem;color:#C8922A;font-family:'Cormorant Garamond',serif;}
+.sigs{display:flex;justify-content:space-between;margin-top:40px;}
+.sig{text-align:center;}
+.sig-line{width:140px;border-top:1px dashed #ccc;margin:30px auto 8px;}
+.sig-name{font-size:0.72rem;color:#999;}
+.doc-foot{margin-top:26px;padding-top:12px;border-top:1px solid #eee;text-align:center;color:#bbb;font-size:0.69rem;}
+.clause{margin-top:18px;background:#f9f9f9;padding:11px 13px;border-radius:8px;font-size:0.76rem;color:#888;line-height:1.6;}
+.clause strong{color:#555;display:block;margin-bottom:3px;}
+/* PRICING */
+.pricing-page{padding:80px 48px;max-width:1100px;margin:0 auto;}
+.pricing-header{text-align:center;margin-bottom:56px;}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;max-width:940px;margin:0 auto;}
+.p-card{background:var(--dark2);border:1px solid var(--border2);border-radius:18px;padding:36px 28px;position:relative;transition:all 0.3s;}
+.p-card:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+.p-card.featured{border-color:var(--gold);background:rgba(200,146,42,0.04);}
+.pop-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--dark);font-size:0.68rem;font-weight:800;padding:4px 16px;border-radius:50px;text-transform:uppercase;white-space:nowrap;}
+.p-name{font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:11px;}
+.p-price{font-family:'Cormorant Garamond',serif;font-size:2.7rem;font-weight:800;line-height:1;}
+.p-price sub{font-size:0.9rem;font-family:'Outfit',sans-serif;font-weight:400;color:var(--muted);}
+.p-desc{color:var(--muted);font-size:0.8rem;margin:11px 0 20px;line-height:1.6;font-weight:300;}
+.p-features{list-style:none;margin-bottom:26px;}
+.p-features li{padding:8px 0;font-size:0.85rem;color:var(--muted);display:flex;gap:9px;border-bottom:1px solid var(--border2);}
+.p-features li:last-child{border-bottom:none;}
+.p-features li::before{content:'✓';color:var(--gold);font-weight:800;flex-shrink:0;}
+.p-features li.no::before{content:'✗';color:#333;}
+.p-features li.no{opacity:0.4;}
+.p-btn{width:100%;padding:12px;border-radius:11px;font-weight:700;font-size:0.9rem;cursor:pointer;font-family:'Outfit',sans-serif;border:1px solid var(--gold);background:transparent;color:var(--gold);transition:all 0.2s;}
+.p-card.featured .p-btn{background:var(--gold);color:var(--dark);}
+.p-btn:hover{transform:translateY(-1px);}
+/* ABOUT */
+.about-page{max-width:840px;margin:0 auto;padding:76px 48px;}
+.about-hero{text-align:center;margin-bottom:68px;}
+.about-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;letter-spacing:-1px;line-height:1.1;}
+.about-hero p{color:var(--muted);font-size:1rem;margin-top:16px;line-height:1.75;font-weight:300;max-width:580px;margin-left:auto;margin-right:auto;}
+.about-section{margin-bottom:52px;}
+.about-section h2{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:700;margin-bottom:14px;}
+.about-section p{color:var(--muted);font-size:0.93rem;line-height:1.8;font-weight:300;margin-bottom:11px;}
+.about-values{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:26px;}
+.value-card{background:var(--dark2);border:1px solid var(--border2);border-radius:13px;padding:24px;text-align:center;}
+.value-icon{margin-bottom:12px;}
+.value-card h3{font-weight:600;font-size:0.9rem;margin-bottom:7px;}
+.value-card p{color:var(--muted);font-size:0.79rem;line-height:1.6;font-weight:300;}
+.contact-box{background:var(--dark2);border:1px solid var(--border);border-radius:18px;padding:38px;text-align:center;}
+.contact-box h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;margin-bottom:10px;}
+.contact-box p{color:var(--muted);margin-bottom:22px;font-weight:300;}
+.contact-links{display:flex;gap:11px;justify-content:center;flex-wrap:wrap;}
+.contact-link{display:flex;align-items:center;gap:9px;padding:12px 20px;border-radius:11px;border:1px solid var(--border2);background:var(--dark3);color:var(--white);text-decoration:none;font-size:0.85rem;font-weight:500;transition:all 0.2s;}
+.contact-link:hover{border-color:var(--gold);color:var(--gold);}
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--dark2);border:1px solid var(--border);border-radius:22px;padding:38px;width:90%;max-width:440px;position:relative;animation:fadeUp 0.3s ease both;}
+.modal-x{position:absolute;top:15px;right:18px;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;line-height:1;}
+.modal-x:hover{color:var(--white);}
+.modal h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:800;margin-bottom:5px;}
+.modal-sub{color:var(--muted);font-size:0.82rem;margin-bottom:18px;font-weight:300;}
+.modal-price{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:800;color:var(--gold);text-align:center;margin-bottom:20px;}
+.modal-price span{font-size:0.9rem;font-family:'Outfit',sans-serif;font-weight:400;color:var(--muted);}
+.pay-opt{display:flex;align-items:center;gap:13px;padding:16px 18px;border-radius:12px;border:1px solid var(--border2);background:var(--dark3);cursor:pointer;color:var(--white);text-decoration:none;transition:all 0.2s;margin-bottom:10px;}
+.pay-opt:hover{border-color:var(--gold);transform:translateY(-2px);}
+.pay-opt-logo{width:44px;height:44px;border-radius:10px;object-fit:contain;flex-shrink:0;background:#fff;padding:4px;}
+.pay-opt-info{flex:1;}
+.pay-opt-name{font-weight:700;font-size:0.92rem;}
+.pay-opt-sub{font-size:0.74rem;color:var(--muted);margin-top:2px;}
+.pay-arrow{color:var(--gold);font-size:1.1rem;font-weight:700;}
+.modal-note{margin-top:4px;padding:12px 14px;background:rgba(200,146,42,0.06);border:1px solid var(--border);border-radius:9px;font-size:0.77rem;color:var(--muted);line-height:1.65;}
+.modal-note strong{color:var(--gold);}
+.modal-note a{color:var(--gold);font-weight:600;text-decoration:none;}
+/* FOOTER */
+footer{background:var(--dark);border-top:1px solid var(--border);padding:42px;text-align:center;}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:800;color:var(--gold);margin-bottom:9px;}
+.footer-tag{color:var(--muted);font-size:0.83rem;margin-bottom:16px;font-weight:300;}
+.footer-tags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:20px;}
+.ftag{background:rgba(200,146,42,0.08);border:1px solid var(--border);color:var(--muted);padding:3px 13px;border-radius:50px;font-size:0.72rem;}
+.footer-copy{color:#444;font-size:0.75rem;}
+.footer-copy a{color:var(--muted);text-decoration:none;}
+/* RESPONSIVE */
+@media(max-width:860px){
+  nav{padding:14px 20px;}.nav-links{display:none;}
+  .hero{padding:72px 20px 56px;}.stat-item{padding:20px 16px;min-width:50%;}
+  .features{padding:56px 20px;}.gen-page{padding:32px 20px;}
+  .gen-layout{grid-template-columns:1fr;}.form-card{position:static;}
+  .pricing-page{padding:56px 20px;}.about-page{padding:52px 20px;}footer{padding:28px 20px;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo" onclick="showPage('home')">Doc<span>Afrik</span></div>
+  <div class="nav-links">
+    <a onclick="showPage('home')">Accueil</a>
+    <a onclick="showPage('generator')">Générer</a>
+    <a onclick="showPage('pricing')">Tarifs</a>
+    <a onclick="showPage('about')">À propos</a>
+  </div>
+  <button class="nav-cta" onclick="showPage('generator')">Créer un document</button>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-bg"></div><div class="hero-grid"></div>
+    <div class="hero-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Pour toute l'Afrique francophone
+    </div>
+    <h1>Vos documents pro,<br/><em>générés en 30 secondes</em></h1>
+    <p>Factures, contrats, devis, fiches de paie — adaptés aux standards africains, sans effort.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="showPage('generator')">Créer un document gratuit</button>
+      <button class="btn-outline" onclick="showPage('pricing')">Voir les tarifs</button>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">7+</div><div class="stat-label">Types de documents</div></div>
+    <div class="stat-item"><div class="stat-num">30s</div><div class="stat-label">Temps de génération</div></div>
+    <div class="stat-item"><div class="stat-num">15+</div><div class="stat-label">Pays couverts</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Gratuit pour commencer</div></div>
+  </div>
+
+  <section class="features">
+    <div class="section-eyebrow">Pourquoi DocAfrik</div>
+    <h2 class="section-title">Tout ce dont vous avez<br/>besoin pour votre business</h2>
+    <p class="section-sub">Conçu pour les entrepreneurs, freelances et PME africains.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <h3>Rapide comme l'éclair</h3><p>Générez n'importe quel document professionnel en moins de 30 secondes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h3>Adapté à l'Afrique</h3><p>TVA Sénégal, Cameroun, Maroc. Devises FCFA, MAD. Standards légaux africains.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        <h3>Mobile & Desktop</h3><p>Fonctionne sur smartphone, tablette et ordinateur. Safari, Chrome, Firefox.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3>Sécurisé & Privé</h3><p>Vos données ne sont jamais partagées. Vos documents vous appartiennent.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <h3>Paiement local</h3><p>Abonnez-vous via Wave ou Orange Money. Pas besoin de carte internationale.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <h3>7 types de documents</h3><p>Factures, devis, CDI, CDD, fiches de paie, bons de commande, reçus.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== GENERATOR ===== -->
+<div class="page" id="page-generator">
+  <div class="gen-page">
+    <div class="gen-header">
+      <h1>Générateur de documents</h1>
+      <p>Choisissez un type, remplissez le formulaire, téléchargez votre PDF.</p>
+    </div>
+    <div class="doc-tabs">
+      <button class="doc-tab active" onclick="selectTab('facture',this)">Facture</button>
+      <button class="doc-tab" onclick="selectTab('devis',this)">Devis</button>
+      <button class="doc-tab" onclick="selectTab('cdi',this)">Contrat CDI</button>
+      <button class="doc-tab" onclick="selectTab('cdd',this)">Contrat CDD</button>
+      <button class="doc-tab" onclick="selectTab('fiche',this)">Fiche de paie</button>
+      <button class="doc-tab" onclick="selectTab('bon',this)">Bon de commande</button>
+      <button class="doc-tab" onclick="selectTab('recu',this)">Reçu de paiement</button>
+    </div>
+    <div class="gen-layout">
+      <!-- FORM -->
+      <div class="form-card">
+        <h3 id="formTitle">Facture</h3>
+        <span class="section-label">Votre entreprise</span>
+        <div class="form-group"><label>Nom / Entreprise</label><input id="f_emetteur" type="text" placeholder="Amadou Diallo SARL"/></div>
+        <div class="form-row">
+          <div class="form-group"><label>Email</label><input id="f_email" type="email" placeholder="contact@email.sn"/></div>
+          <div class="form-group"><label>Téléphone</label><input id="f_tel" type="text" placeholder="+221 77 000 00 00"/></div>
+        </div>
+        <div class="form-group"><label>Ville / Pays</label><input id="f_ville" type="text" placeholder="Dakar, Sénégal"/></div>
+        <hr class="form-divider"/>
+        <span class="section-label">Client / Destinataire</span>
+        <div class="form-group"><label>Nom du client</label><input id="f_client" type="text" placeholder="Société ABC"/></div>
+        <div class="form-group"><label>Email client</label><input id="f_clientEmail" type="email" placeholder="client@email.com"/></div>
+        <hr class="form-divider"/>
+        <span class="section-label">Prestation</span>
+        <div class="form-group"><label>Description</label><textarea id="f_service" placeholder="Conception de site web, Consulting..."></textarea></div>
+        <div class="form-row">
+          <div class="form-group"><label>Montant HT (FCFA)</label><input id="f_montant" type="number" placeholder="150000"/></div>
+          <div class="form-group"><label>TVA</label>
+            <select id="f_tva">
+              <option value="0">Sans TVA</option>
+              <option value="18" selected>18% — Sénégal</option>
+              <option value="19.25">19.25% — Cameroun</option>
+              <option value="20">20% — Maroc</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Numéro</label><input id="f_num" type="text" value="FAC-2024-001"/></div>
+          <div class="form-group"><label>Date</label><input id="f_date" type="date"/></div>
+        </div>
+        <div class="form-group"><label>Conditions de paiement</label>
+          <select id="f_conditions">
+            <option>Paiement à réception</option>
+            <option>Paiement sous 15 jours</option>
+            <option>Paiement sous 30 jours</option>
+            <option>50% avance, 50% à la livraison</option>
+          </select>
+        </div>
+        <button class="btn-gen" onclick="generateDoc()">Générer le document</button>
+      </div>
+      <!-- PREVIEW -->
+      <div class="preview-card">
+        <div class="preview-toolbar">
+          <span>Aperçu du document</span>
+          <div class="toolbar-btns">
+            <button class="tbtn" onclick="copyDocText()">Copier</button>
+            <button class="tbtn gold" onclick="downloadPDF()">Télécharger PDF</button>
+          </div>
+        </div>
+        <div class="preview-area" id="previewArea">
+          <div class="preview-empty" id="previewEmpty">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <p>Remplissez le formulaire<br/>et cliquez sur <strong>Générer</strong></p>
+          </div>
+          <div class="doc-content" id="docContent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PRICING ===== -->
+<div class="page" id="page-pricing">
+  <div class="pricing-page">
+    <div class="pricing-header">
+      <div class="section-eyebrow">Tarifs</div>
+      <h2 class="section-title">Simple, transparent,<br/>adapté à l'Afrique</h2>
+      <p style="color:var(--muted);margin-top:10px;font-weight:300;">Commencez gratuitement. Passez au premium quand vous êtes prêt.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="p-card">
+        <div class="p-name">Gratuit</div>
+        <div class="p-price">0 <sub>FCFA/mois</sub></div>
+        <p class="p-desc">Pour tester DocAfrik.</p>
+        <ul class="p-features">
+          <li>3 documents par mois</li>
+          <li>Factures et devis</li>
+          <li>Téléchargement PDF</li>
+          <li class="no">Filigrane visible</li>
+          <li class="no">Logo personnalisé</li>
+        </ul>
+        <button class="p-btn" onclick="showPage('generator')">Commencer gratuitement</button>
+      </div>
+      <div class="p-card featured">
+        <div class="pop-badge">Le plus populaire</div>
+        <div class="p-name">Pro</div>
+        <div class="p-price">9 900 <sub>FCFA/mois</sub></div>
+        <p class="p-desc">Pour les freelances actifs.</p>
+        <ul class="p-features">
+          <li>Documents illimités</li>
+          <li>7 types de documents</li>
+          <li>Sans filigrane</li>
+          <li>Logo personnalisé</li>
+          <li>Historique complet</li>
+        </ul>
+        <button class="p-btn" onclick="openModal('Pro','9 900')">Passer au Pro</button>
+      </div>
+      <div class="p-card">
+        <div class="p-name">Business</div>
+        <div class="p-price">24 900 <sub>FCFA/mois</sub></div>
+        <p class="p-desc">Pour les équipes et PME.</p>
+        <ul class="p-features">
+          <li>Tout le plan Pro</li>
+          <li>5 utilisateurs</li>
+          <li>API d'intégration</li>
+          <li>Support prioritaire</li>
+          <li>Multi-devises</li>
+        </ul>
+        <button class="p-btn" onclick="openModal('Business','24 900')">Souscrire Business</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<div class="page" id="page-about">
+  <div class="about-page">
+    <div class="about-hero">
+      <div class="section-eyebrow">À propos de DocAfrik</div>
+      <h1>Né en Afrique,<br/>conçu pour le monde</h1>
+      <p>DocAfrik simplifie la création de documents professionnels pour les entrepreneurs africains — en 30 secondes, votre document est prêt.</p>
+    </div>
+    <div class="about-section">
+      <h2>Notre mission</h2>
+      <p>Chaque jour, des milliers d'entrepreneurs africains perdent du temps à chercher un modèle de facture ou de contrat. DocAfrik simplifie tout cela.</p>
+      <p>Notre mission est de donner aux petites entreprises africaines les mêmes outils professionnels que les grandes entreprises — sans coût prohibitif.</p>
+    </div>
+    <div class="about-section">
+      <h2>Nos valeurs</h2>
+      <div class="about-values">
+        <div class="value-card">
+          <div class="value-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Accessibilité</h3><p>Des outils pour tous, peu importe la taille de votre entreprise.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3>Simplicité</h3><p>Vous venez, vous générez, vous téléchargez. Rien de plus.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <h3>Confiance</h3><p>Vos données sont privées. Jamais partagées.</p>
+        </div>
+      </div>
+    </div>
+    <div class="contact-box">
+      <h2>Contactez-nous</h2>
+      <p>Une question ou un partenariat ? On vous répond rapidement.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:afrilance.sn@gmail.com">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          afrilance.sn@gmail.com
+        </a>
+        <a class="contact-link" href="tel:+221764641887">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +221 76 464 18 87
+        </a>
+        <a class="contact-link" href="tel:+221775965139">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +221 77 596 51 39
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">DocAfrik</div>
+  <p class="footer-tag">Le générateur de documents professionnels pour l'Afrique francophone</p>
+  <div class="footer-tags">
+    <span class="ftag">Sénégal</span><span class="ftag">Côte d'Ivoire</span>
+    <span class="ftag">Cameroun</span><span class="ftag">Mali</span>
+    <span class="ftag">Maroc</span><span class="ftag">RDC</span><span class="ftag">+ 9 pays</span>
+  </div>
+  <p class="footer-copy">© 2024 DocAfrik · <a onclick="showPage('about')">À propos</a> · <a href="mailto:afrilance.sn@gmail.com">Contact</a></p>
+</footer>
+
+<!-- MODAL PAIEMENT -->
+<div class="modal-overlay" id="payModal">
+  <div class="modal">
+    <button class="modal-x" onclick="closeModal()">✕</button>
+    <h2>Abonnement <span style="color:var(--gold)" id="mPlanName">Pro</span></h2>
+    <p class="modal-sub">Choisissez votre mode de paiement</p>
+    <div class="modal-price" id="mPrice">9 900 <span>FCFA/mois</span></div>
+
+    <!-- WAVE -->
+    <a class="pay-opt" href="https://pay.wave.com/m/M_sn_V3Dd8yVZ3SIz/c/sn/" target="_blank">
+      <img class="pay-opt-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Wave_logo.svg/512px-Wave_logo.svg.png" alt="Wave" onerror="this.style.background='#1565C0';this.src='';"/>
+      <div class="pay-opt-info">
+        <div class="pay-opt-name">Payer avec Wave</div>
+        <div class="pay-opt-sub">Cliquez pour payer directement</div>
+      </div>
+      <div class="pay-arrow">→</div>
+    </a>
+
+    <!-- ORANGE MONEY -->
+    <div class="pay-opt" onclick="copyOrange()">
+      <img class="pay-opt-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Orange_Money_logo.svg/512px-Orange_Money_logo.svg.png" alt="Orange Money" onerror="this.style.background='#FF6600';this.src='';"/>
+      <div class="pay-opt-info">
+        <div class="pay-opt-name">Payer avec Orange Money</div>
+        <div class="pay-opt-sub">+221 77 596 51 39</div>
+      </div>
+      <div class="pay-arrow" id="orangeArrow">Copier →</div>
+    </div>
+
+    <div class="modal-note">
+      Après paiement, envoyez votre capture d'écran à <strong>afrilance.sn@gmail.com</strong> pour activer votre accès sous 24h.<br/><br/>
+      <a href="mailto:afrilance.sn@gmail.com?subject=Activation%20abonnement%20DocAfrik&body=Bonjour%2C%0A%0AJe%20viens%20de%20payer.%20Ci-joint%20ma%20capture%20d'%C3%A9cran.">Envoyer l'email de confirmation →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== NAVIGATION =====
+function showPage(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ===== TABS =====
+let currentDoc='facture';
+const docTitles={facture:'Facture',devis:'Devis',cdi:'Contrat CDI',cdd:'Contrat CDD',fiche:'Fiche de paie',bon:'Bon de commande',recu:'Reçu de paiement'};
+const docNums={facture:'FAC-2024-001',devis:'DEV-2024-001',cdi:'CTR-CDI-001',cdd:'CTR-CDD-001',fiche:'FDP-2024-001',bon:'BC-2024-001',recu:'REC-2024-001'};
+
+function selectTab(type,el){
+  document.querySelectorAll('.doc-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  currentDoc=type;
+  document.getElementById('formTitle').textContent=docTitles[type];
+  document.getElementById('f_num').value=docNums[type];
+  document.getElementById('previewEmpty').style.display='flex';
+  const dc=document.getElementById('docContent');
+  dc.classList.remove('show');dc.innerHTML='';
+}
+
+function v(id){const el=document.getElementById(id);return el?el.value.trim():'';}
+function fmt(n){return n.toLocaleString('fr-FR');}
+
+// ===== GENERATE =====
+function generateDoc(){
+  const e={
+    nom:v('f_emetteur')||'Votre Entreprise',
+    email:v('f_email')||'contact@email.com',
+    tel:v('f_tel')||'+221 77 000 00 00',
+    ville:v('f_ville')||'Dakar, Sénégal'
+  };
+  const c={nom:v('f_client')||'Client',email:v('f_clientEmail')||'client@email.com'};
+  const mHT=parseFloat(v('f_montant'))||0;
+  const tvaRate=parseFloat(v('f_tva'))||0;
+  const tva=mHT*tvaRate/100;
+  const ttc=mHT+tva;
+  const num=v('f_num')||'DOC-001';
+  const dateVal=v('f_date')||new Date().toISOString().split('T')[0];
+  const dateStr=new Date(dateVal+'T12:00:00').toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
+  const service=v('f_service')||'Prestation de services';
+  const cond=v('f_conditions')||'Paiement à réception';
+  const typeLabels={facture:'FACTURE',devis:'DEVIS',cdi:'CONTRAT CDI',cdd:'CONTRAT CDD',fiche:'BULLETIN DE PAIE',bon:'BON DE COMMANDE',recu:'REÇU DE PAIEMENT'};
+  const clientLabel=['cdi','cdd','fiche'].includes(currentDoc)?'Employé(e)':'Client';
+  let clause='';
+  if(currentDoc==='cdi') clause=`<div class="clause"><strong>Clauses CDI</strong>Contrat à durée indéterminée. Période d'essai : 3 mois renouvelable. Toute rupture devra respecter le préavis légal en vigueur.</div>`;
+  if(currentDoc==='cdd') clause=`<div class="clause"><strong>Clauses CDD</strong>Contrat à durée déterminée. Une indemnité de fin de contrat de 5% du total des salaires bruts sera versée à l'expiration.</div>`;
+
+  const html=`
+  <div class="dh">
+    <div class="dh-left"><div class="company">${e.nom}</div><div class="co-info">${e.email}<br/>${e.tel}<br/>${e.ville}</div></div>
+    <div class="dh-right"><div class="dtype">${typeLabels[currentDoc]}</div><div class="dnum">N° ${num}<br/>${dateStr}</div></div>
+  </div>
+  <div class="parties">
+    <div class="party"><div class="party-lbl">Émetteur</div><div class="party-name">${e.nom}</div><div class="party-info">${e.email}<br/>${e.ville}</div></div>
+    <div class="party"><div class="party-lbl">${clientLabel}</div><div class="party-name">${c.nom}</div><div class="party-info">${c.email}</div></div>
+  </div>
+  <table class="items">
+    <thead><tr><th>Description</th><th>Qté</th><th>Prix HT</th><th>Total HT</th></tr></thead>
+    <tbody><tr><td>${service}</td><td>1</td><td>${fmt(mHT)} FCFA</td><td>${fmt(mHT)} FCFA</td></tr></tbody>
+  </table>
+  <div class="totals"><div class="total-box">
+    <div class="t-row"><span>Sous-total HT</span><span>${fmt(mHT)} FCFA</span></div>
+    ${tvaRate>0?`<div class="t-row"><span>TVA (${tvaRate}%)</span><span>${fmt(tva)} FCFA</span></div>`:''}
+    <div class="t-final"><span class="t-label">TOTAL TTC</span><span class="t-amount">${fmt(ttc)} FCFA</span></div>
+  </div></div>
+  ${clause}
+  <div class="clause"><strong>Conditions</strong>${cond}</div>
+  <div class="sigs">
+    <div class="sig"><div class="sig-line"></div><div class="sig-name">Émetteur — ${e.nom}</div></div>
+    <div class="sig"><div class="sig-line"></div><div class="sig-name">${clientLabel} — ${c.nom}</div></div>
+  </div>
+  <div class="doc-foot">Document généré par DocAfrik · ${e.ville} · ${dateStr}</div>`;
+
+  document.getElementById('previewEmpty').style.display='none';
+  const dc=document.getElementById('docContent');
+  dc.innerHTML=html;dc.classList.add('show');
+}
+
+// ===== PDF =====
+function downloadPDF(){
+  const content=document.getElementById('docContent').innerHTML;
+  if(!content.trim()){alert('Générez d\'abord un document !');return;}
+  const win=window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"/><title>DocAfrik</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+  body{font-family:'Outfit',sans-serif;padding:40px;color:#111;font-size:13px;line-height:1.6;max-width:760px;margin:0 auto;}
+  .dh{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:26px;padding-bottom:14px;border-bottom:3px solid #C8922A;}
+  .company{font-size:1.25rem;font-weight:800;color:#C8922A;font-family:'Cormorant Garamond',serif;}
+  .co-info{color:#888;font-size:0.75rem;margin-top:4px;line-height:1.5;}
+  .dh-right{text-align:right;}.dtype{font-size:0.9rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:1px;}
+  .dnum{color:#999;font-size:0.75rem;margin-top:3px;}
+  .parties{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+  .party{background:#f9f9f9;padding:11px 13px;border-radius:7px;border-left:3px solid #C8922A;}
+  .party-lbl{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#C8922A;margin-bottom:4px;}
+  .party-name{font-weight:700;font-size:0.88rem;}.party-info{color:#888;font-size:0.75rem;margin-top:2px;}
+  table.items{width:100%;border-collapse:collapse;margin:14px 0;}
+  table.items th{background:#C8922A;color:#fff;padding:8px 12px;text-align:left;font-size:0.72rem;font-weight:600;text-transform:uppercase;}
+  table.items td{padding:9px 12px;border-bottom:1px solid #f0f0f0;font-size:0.82rem;}
+  .totals{display:flex;justify-content:flex-end;margin-top:14px;}
+  .total-box{min-width:190px;background:#fff8ee;border:1px solid #C8922A;border-radius:8px;padding:12px 16px;}
+  .t-row{display:flex;justify-content:space-between;font-size:0.78rem;color:#888;padding:2px 0;}
+  .t-final{display:flex;justify-content:space-between;margin-top:7px;padding-top:7px;border-top:1px solid #C8922A;}
+  .t-label{font-weight:700;font-size:0.84rem;color:#333;}.t-amount{font-weight:800;font-size:1.1rem;color:#C8922A;font-family:'Cormorant Garamond',serif;}
+  .sigs{display:flex;justify-content:space-between;margin-top:38px;}
+  .sig{text-align:center;}.sig-line{width:140px;border-top:1px dashed #ccc;margin:28px auto 7px;}.sig-name{font-size:0.71rem;color:#999;}
+  .doc-foot{margin-top:24px;padding-top:11px;border-top:1px solid #eee;text-align:center;color:#bbb;font-size:0.68rem;}
+  .clause{margin-top:16px;background:#f9f9f9;padding:10px 12px;border-radius:7px;font-size:0.76rem;color:#888;line-height:1.6;}
+  .clause strong{color:#555;display:block;margin-bottom:3px;}
+  @media print{body{padding:20px;}}
+  </style></head><body>${content}</body></html>`);
+  win.document.close();
+  setTimeout(()=>{win.print();},500);
+}
+
+function copyDocText(){
+  const text=document.getElementById('docContent').innerText;
+  if(!text.trim()){alert('Générez d\'abord un document !');return;}
+  navigator.clipboard.writeText(text).then(()=>alert('Copié dans le presse-papier !'));
+}
+
+// ===== MODAL =====
+let currentPlan='Pro';
+
+function openModal(plan,price){
+  currentPlan=plan;
+  document.getElementById('mPlanName').textContent=plan;
+  document.getElementById('mPrice').innerHTML=`${price} <span>FCFA/mois</span>`;
+  document.getElementById('payModal').classList.add('open');
+}
+
+function closeModal(){
+  document.getElementById('payModal').classList.remove('open');
+}
+
+document.getElementById('payModal').addEventListener('click',function(e){
+  if(e.target===this) closeModal();
+});
+
+function copyOrange(){
+  navigator.clipboard.writeText('+221775965139').then(()=>{
+    const el=document.getElementById('orangeArrow');
+    el.textContent='Copié !';el.style.color='#4CAF50';
+    setTimeout(()=>{el.textContent='Copier →';el.style.color='';},2500);
+  });
+}
+
+// ===== INIT =====
+document.getElementById('f_date').valueAsDate=new Date();
+</script>
+</body>
+</html>
