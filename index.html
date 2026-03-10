@@ -428,13 +428,17 @@
       <h2>Contactez-nous</h2>
       <p>Une question, une suggestion ou un partenariat ? On vous répond rapidement.</p>
       <div class="contact-links">
-        <a class="contact-link" href="/cdn-cgi/l/email-protection#2f4e495d46434e414c4a015c416f48424e4643014c4042">
+        <a class="contact-link" href="mailto:afrilance.sn@gmail.com">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span class="__cf_email__" data-cfemail="a1c0c7d3c8cdc0cfc2c48fd2cfe1c6ccc0c8cd8fc2cecc">[email&#160;protected]</span>
+          afrilance.sn@gmail.com
         </a>
-        <a class="contact-link" href="https://wave.com/send?phone=+221775965139" target="_blank">
+        <a class="contact-link" href="tel:+221764641887">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Wave — +221 77 596 51 39
+          +221 76 464 18 87
+        </a>
+        <a class="contact-link" href="tel:+221775965139">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +221 77 596 51 39
         </a>
       </div>
     </div>
@@ -573,14 +577,21 @@ function copyDocText(){
 
 // ===== PAYTECH INTEGRATION =====
 let currentPlan='Pro';
-let currentAmount=990000; // en centimes FCFA
+let currentAmount=9900;
 
 function openModal(plan,price){
   currentPlan=plan;
-  currentAmount = plan==='Pro' ? 990000 : 2490000;
+  currentAmount = plan==='Pro' ? 9900 : 24900;
   document.getElementById('mPlanName').textContent=plan;
   document.getElementById('mPrice').innerHTML=`${price} <span>FCFA/mois</span>`;
   document.getElementById('payModal').classList.add('open');
+  // Reset bouton
+  const btn=document.getElementById('paytechBtn');
+  if(btn){btn.textContent='Payer maintenant';btn.disabled=false;}
+  document.getElementById('paytechContainer').innerHTML=`
+    <button class="btn-gen" id="paytechBtn" onclick="initPayTech()" style="margin-top:0;">Payer maintenant</button>
+    <p style="color:var(--muted);font-size:0.74rem;margin-top:10px;">Paiement sécurisé — Wave, Orange Money, Carte</p>
+  `;
 }
 
 function closeModal(){document.getElementById('payModal').classList.remove('open');}
@@ -607,7 +618,7 @@ async function initPayTech(){
         ref_command: 'DOCAFRIK-' + Date.now(),
         command_name: 'Abonnement DocAfrik ' + currentPlan,
         env: 'prod',
-        ipn_url: 'https://docafrik.vercel.app/ipn',
+        ipn_url: 'https://docafrik.vercel.app/',
         success_url: 'https://docafrik.vercel.app/?payment=success',
         cancel_url: 'https://docafrik.vercel.app/?payment=cancel',
         custom_field: JSON.stringify({ plan: currentPlan })
@@ -619,22 +630,55 @@ async function initPayTech(){
     if(data.success === 1 && data.redirect_url) {
       window.location.href = data.redirect_url;
     } else {
-      alert('Erreur de paiement. Veuillez réessayer.');
-      btn.textContent='Payer maintenant';
-      btn.disabled=false;
+      showManualPayment();
     }
   } catch(err) {
-    alert('Erreur de connexion. Vérifiez votre connexion internet.');
-    btn.textContent='Payer maintenant';
-    btn.disabled=false;
+    showManualPayment();
   }
 }
 
-// Check payment success on page load
+function showManualPayment(){
+  document.getElementById('paytechContainer').innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:11px;margin-top:4px;">
+      <a href="https://wave.com/send?phone=+221775965139" target="_blank" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:13px;border:1px solid rgba(255,255,255,0.06);background:#1A1A1A;text-decoration:none;color:white;">
+        <div style="width:44px;height:44px;border-radius:11px;background:#1565C0;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 22V12m0 0L6 6m6 6 6-6"/><path d="M2 17c0 2.2 1.8 4 4 4h12c2.2 0 4-1.8 4-4"/></svg>
+        </div>
+        <div style="flex:1;text-align:left;">
+          <div style="font-weight:700;font-size:0.92rem;">Payer avec Wave</div>
+          <div style="font-size:0.76rem;color:#777;margin-top:2px;">+221 77 596 51 39</div>
+        </div>
+        <div style="color:#C8922A;font-size:0.82rem;font-weight:700;">Ouvrir →</div>
+      </a>
+      <div onclick="copyNum()" style="display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:13px;border:1px solid rgba(255,255,255,0.06);background:#1A1A1A;cursor:pointer;color:white;">
+        <div style="width:44px;height:44px;border-radius:11px;background:#E65100;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div style="flex:1;text-align:left;">
+          <div style="font-weight:700;font-size:0.92rem;">Payer avec Orange Money</div>
+          <div style="font-size:0.76rem;color:#777;margin-top:2px;">+221 77 596 51 39</div>
+        </div>
+        <div id="copyBtn" style="color:#C8922A;font-size:0.82rem;font-weight:700;">Copier →</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding:13px 15px;background:rgba(200,146,42,0.06);border:1px solid rgba(200,146,42,0.18);border-radius:10px;font-size:0.79rem;color:#777;line-height:1.65;">
+      Après paiement, envoyez votre capture d'écran à <strong style="color:#C8922A;">afrilance.sn@gmail.com</strong> pour activer votre accès.<br/><br/>
+      <a href="mailto:afrilance.sn@gmail.com?subject=Activation%20abonnement%20DocAfrik&body=Bonjour%2C%0A%0AJe%20viens%20de%20payer.%20Ci-joint%20ma%20capture%20d'%C3%A9cran." style="color:#C8922A;font-weight:600;">Envoyer l'email de confirmation →</a>
+    </div>
+  `;
+}
+
+function copyNum(){
+  navigator.clipboard.writeText('+221775965139').then(()=>{
+    const el=document.getElementById('copyBtn');
+    if(el){el.textContent='Copié !';el.style.color='#4CAF50';setTimeout(()=>{el.textContent='Copier →';el.style.color='#C8922A';},2500);}
+  });
+}
+
 window.addEventListener('load', function(){
   const params = new URLSearchParams(window.location.search);
-  if(params.get('payment') === 'success'){
-    alert('Paiement réussi ! Votre abonnement est activé. Bienvenue dans DocAfrik Pro !');
+  if(params.get('payment')==='success'){
+    alert('Paiement réussi ! Bienvenue dans DocAfrik ' + currentPlan + ' !');
     history.replaceState({}, '', window.location.pathname);
   }
 });
